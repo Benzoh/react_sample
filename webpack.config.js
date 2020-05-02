@@ -1,20 +1,21 @@
 module.exports = {
-  // simple config from http://webpack.github.io/docs/configuration.html
-  entry: "./src/index.js",
-  output: { path: __dirname + "/public/dist", filename: "bundle.js" },
+  entry: './src/index.ts',
   mode: "development",
-
-  // using webpack loader
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
-        loader: "babel-loader", // or just "babel"
-        query: {
-          presets: ['@babel/preset-react', '@babel/preset-env']
-        }
-      }
-    ]
-  }
+      },
+    ],
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
+  },
+  output: {
+    path: __dirname + "/public/dist",
+    filename: "bundle.js"
+  },
 };
